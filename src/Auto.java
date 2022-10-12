@@ -62,4 +62,5 @@ public class Auto {
     public String toString () {
         return brand + " " + model + " " + engineVolume + " " + "цвет кузова: " + colour + ", " + productionYear + " год производства, страна производства: " + country;
     }
+
 }
