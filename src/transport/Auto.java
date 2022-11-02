@@ -1,7 +1,7 @@
 package transport;
 import java.time.LocalDate;
 import java.util.Calendar;
-public class Auto {
+public class Auto extends Transport {
     public class Key {
         private boolean remoteEngineStart;
         private boolean keylessAccess;
@@ -84,40 +84,16 @@ public class Auto {
     }
     private Key key;
     private Insurance insurance;
-    private String brand;
-    private String model;
     private Double engineVolume;
-    private String colour;
-    private int productionYear;
-    private String country;
     private String transmission;
     private String bodyType;
     private String plateNumber;
     private int seatsNumber;
     private boolean winterTire;
 
-    public String getBrand() {
-        return brand;
-    }
-
-    public String getModel() {
-        return model;
-    }
 
     public Double getEngineVolume() {
         return engineVolume;
-    }
-
-    public String getColour() {
-        return colour;
-    }
-
-    public int getProductionYear() {
-        return productionYear;
-    }
-
-    public String getCountry() {
-        return country;
     }
 
     public String getTransmission() {
@@ -144,10 +120,6 @@ public class Auto {
         this.engineVolume = engineVolume;
     }
 
-    public void setColour(String colour) {
-        this.colour = colour;
-    }
-
     public void setTransmission(String transmission) {
         this.transmission = transmission;
     }
@@ -160,90 +132,32 @@ public class Auto {
         this.winterTire = winterTire;
     }
 
-    public Auto (String brand, String model, Double engineVolume, String colour, int productionYear, String country, String transmission, String bodyType, String plateNumber, int seatsNumber, boolean winterTire) {
-        if (brand == null) {
-            brand = "default";
-        }
-        if (model == null) {
-            model = "default";
-        }
-        if (country == null) {
-            country = "default";
-        }
+    public Auto (String brand, String model, double engineVolume, String colour, int productionYear, String country, String transmission, String bodyType, String plateNumber, int seatsNumber, boolean winterTire, double maxSpeed, String fuel) {
+        super(brand, model, productionYear, country, colour, maxSpeed, fuel);
         if (engineVolume == 0.0) {
             engineVolume = 1.5;
-        }
-        if (colour == null) {
-            colour = "белый";
-        }
-        if (productionYear == 0) {
-            productionYear = 2000;
         }
         if (transmission != null && !transmission.isEmpty()  && !transmission.isBlank()) {
             this.transmission = transmission;
         }
-        this.brand = brand;
-        this.model = model;
         this.engineVolume = engineVolume;
-        this.colour = colour;
-        this.productionYear = productionYear;
-        this.country = country;
         this.winterTire = winterTire;
         this.plateNumber = plateNumber;
         this.bodyType = bodyType;
         this.seatsNumber = seatsNumber;
     }
-    public Auto (String brand, String model, Double engineVolume, String colour, int productionYear, String country) {
-        if (brand == null) {
-            brand = "default";
-        }
-        if (model == null) {
-            model = "default";
-        }
-        if (country == null) {
-            country = "default";
-        }
+    public Auto (String brand, String model, int productionYear, String country, String colour, double maxSpeed, String fuel, Double engineVolume) {
+        super(brand, model, productionYear, country, colour, maxSpeed, fuel);
         if (engineVolume == 0.0) {
             engineVolume = 1.5;
         }
-        if (colour == null) {
-            colour = "белый";
-        }
-        if (productionYear == 0) {
-            productionYear = 2000;
-        }
-        this.brand = brand;
-        this.model = model;
         this.engineVolume = engineVolume;
-        this.colour = colour;
-        this.productionYear = productionYear;
-        this.country = country;
+    }
+    public Auto (String brand, String model, int productionYear, String country, String colour, double maxSpeed, String fuel) {
+        super(brand, model, productionYear, country, colour, maxSpeed, fuel);
     }
     public Auto () {
-        if (brand == null || brand.isBlank() || brand.isEmpty()) {
-            brand = "default";
-        }
-        if (model == null || model.isBlank() || model.isEmpty()) {
-            model = "default";
-        }
-        if (country == null || country.isBlank() || country.isEmpty()) {
-            country = "default";
-        }
-        if (engineVolume == null || engineVolume == 0.0) {
-            engineVolume = 1.5;
-        }
-        if (colour == null || colour.isBlank() || colour.isEmpty()) {
-            colour = "белый";
-        }
-        if (productionYear == 0) {
-            productionYear = 2000;
-        }
-        this.brand = brand;
-        this.model = model;
-        this.engineVolume = engineVolume;
-        this.colour = colour;
-        this.productionYear = productionYear;
-        this.country = country;
+        super();
     }
 
     public String stringCheck() {
@@ -259,9 +173,11 @@ public class Auto {
     public void changeTires () {
         winterTire = !winterTire;
     }
-
+    public String refill() {
+        return "Топливо: " + getFuel();
+    }
     public String toString () {
-        return brand + " " + model + " " + engineVolume + " " + "цвет кузова: " + colour + ", " + productionYear + " год производства, страна производства: " + country;
+        return getBrand() + " " + getModel() + " " + engineVolume + " " + "цвет кузова: " + getColour() + ", " + getProductionYear() + " год производства, страна производства: " + getCountry() + refill();
     }
 
 
